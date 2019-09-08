@@ -128,3 +128,7 @@ data/*
 
 .sass-cache
 
+# Futurize backups
+*.bak
+*.py.bak
+
