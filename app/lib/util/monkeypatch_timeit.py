@@ -1,6 +1,6 @@
 """
 /!\
-Gryphon code works for python up to 3.4 but not 3.5+ as the _template_func function appears to have been removed in 3.5
+Old monkeypatch works for python up to 3.4 but not 3.5+ as the _template_func function appears to have been removed in 3.5
 https://stackoverflow.com/questions/24812253/how-can-i-capture-return-value-with-python-timeit-module
 
 Monkeypatch the timeit module so that it returns a function result as well
@@ -24,7 +24,7 @@ import timeit
 # def monkeypatch_timeit():
 #     timeit._template_func = _template_func
 
-# NEW GRYPHON MONKEYPATCH (for python>3.5)
+# NEW MONKEYPATCH (for python>3.5)
 timeit.template = """
 def inner(_it, _timer{init}):
     {setup}
