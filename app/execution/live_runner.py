@@ -20,8 +20,8 @@ from execution.lib.heartbeat import Heartbeat
 from execution.lib.sentry import Sentry
 from lib import session
 from lib.logger import get_logger
-from lib.models.event import EventRecorder
-from lib.models.datum import DatumRecorder
+from lib.models.mysql.event import EventRecorder
+from lib.models.mysql.datum import DatumRecorder
 from lib.util.time import humanize_seconds
 
 logger = get_logger(__name__)

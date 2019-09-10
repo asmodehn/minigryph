@@ -3,10 +3,10 @@ from collections import defaultdict
 from sqlalchemy import func
 
 from lib.logger import get_logger
-from lib.models.order import Order                                              #pyx file
-from lib.models.trade import Trade                                              #pyx file
-from lib.models.transaction import Transaction
-from lib.models.exchange import Exchange, Balance                               #pyx file
+from lib.models.mysql.order import Order                                              #pyx file
+from lib.models.mysql.trade import Trade                                              #pyx file
+from lib.models.mysql.transaction import Transaction
+from lib.models.mysql.exchange import Exchange, Balance                               #pyx file
 from lib.money import Money
 from lib.gryphonfury.revenue import get_start_and_end_position, get_start_and_end_position_trades
 

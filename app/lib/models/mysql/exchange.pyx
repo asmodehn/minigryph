@@ -1,4 +1,11 @@
+#!python
+#cython: language_level=3
 # -*- coding: utf-8 -*-
+
+from __future__ import division
+from builtins import str
+from builtins import range
+from past.utils import old_div
 import copy
 import json
 import uuid
@@ -14,10 +21,10 @@ from sqlalchemy.types import TypeDecorator, UnicodeText
 from lib import gryphon_json_serialize
 from lib.exchange.exchange_factory import make_exchange_from_key
 from lib.logger import get_logger
-from lib.models.base import Base                                                #pyx file
-from lib.models.order import Order                                              #pyx file
-from lib.models.trade import Trade                                              #pyx file
-from lib.models.transaction import Transaction
+from lib.models.mysql.base import Base                                                #pyx file
+from lib.models.mysql.order import Order                                              #pyx file
+from lib.models.mysql.trade import Trade                                              #pyx file
+from lib.models.mysql.transaction import Transaction
 from lib.money import Money
 
 logger = get_logger(__name__)
@@ -38,7 +45,7 @@ class JSONEncodedMoneyDict(TypeDecorator):
     def load_json_money_dict(self, value):
         d = json.loads(value)
 
-        for key, value in d.items():
+        for key, value in list(d.items()):
             d[key] = Money.loads(value)
 
         return d
@@ -102,11 +109,11 @@ class Balance(MutableDict):
         # Make a deep copy of self. copy.deepcopy() is 4x slower than this
         # because we know the exact structure and don't have to watch for recursions
         result = self.__class__()
-        for currency, m in self.iteritems():
+        for currency, m in self.items():
             result[currency] = Money(m.amount, m.currency)
 
         if isinstance(other, Balance):
-            all_currencies = list(set(self.keys() + other.keys()))
+            all_currencies = list(set(list(self.keys()) + list(other.keys())))
             for c in all_currencies:
                 result[c] += other[c]
         elif isinstance(other, Money):
@@ -117,7 +124,7 @@ class Balance(MutableDict):
 
     def __neg__(self):
         result = self.__class__()
-        for currency, balance in self.iteritems():
+        for currency, balance in self.items():
             result[currency] = -balance
         return result
 
@@ -125,7 +132,7 @@ class Balance(MutableDict):
         return self + (-other)
 
     def fiat(self):
-        currencies = self.keys()
+        currencies = list(self.keys())
 
         non_btc_currencies = [c for c in currencies if c != 'BTC']
         if len(non_btc_currencies) > 1:
@@ -138,7 +145,7 @@ class Balance(MutableDict):
 
     def total_usd_value(self, date=None):
         total_usd_value = Money(0, 'USD')
-        for currency, balance in self.iteritems():
+        for currency, balance in self.items():
             total_usd_value += balance.to('USD', date=date)
         return total_usd_value
 
@@ -168,7 +175,7 @@ class Exchange(Base):
     transactions = relationship('Transaction', cascade='all,delete-orphan', backref='exchange', lazy='dynamic')
 
     def __init__(self, name):
-        self.unique_id = unicode(uuid.uuid4().hex)
+        self.unique_id = str(uuid.uuid4().hex)
         self.name = name
         self.position = Position()
         self.target = Target()
@@ -215,7 +222,7 @@ class Exchange(Base):
         if deposit_amount:
             logger.info('deposit amount: %s' % deposit_amount)
             if deposit_amount.currency != withdrawal_amount.currency:
-                exchange_rate = str(withdrawal_amount.amount / deposit_amount.amount)
+                exchange_rate = str(old_div(withdrawal_amount.amount, deposit_amount.amount))
                 transaction_details.update({'exchange_rate': exchange_rate})
 
         withdrawal_fee = None

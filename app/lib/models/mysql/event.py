@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from builtins import str
+from builtins import object
 from datetime import datetime
 import json
 import os
@@ -6,9 +8,10 @@ import uuid
 
 from sqlalchemy import ForeignKey, Column, Integer, Unicode, DateTime, UnicodeText, BigInteger, Numeric
 
-from gryphon.lib.models.base import Base
-from gryphon.lib.session import commit_mysql_session
-from gryphon.lib.singleton import Singleton
+from lib.models.mysql.base import Base                                                        #pyx file
+from lib.session import commit_mysql_session
+from lib.singleton import Singleton
+from future.utils import with_metaclass
 
 metadata = Base.metadata
 
@@ -27,24 +30,22 @@ class Event(Base):
         self.time_created = datetime.utcnow()
         self.event_type = event_type
         self.exchange_name = exchange_name
-        self.unique_id = u'evt_%s' % unicode(uuid.uuid4().hex)
+        self.unique_id = u'evt_%s' % str(uuid.uuid4().hex)
         self.data = json.dumps(data)
         
     def __unicode__(self):
-        return unicode(repr(self))
+        return str(repr(self))
         
     def __repr__(self):
         return json.dumps({
             'event_type':self.event_type,
             'exchange':self.exchange_name,
             'data': json.loads(self.data),
-            'time_created': unicode(self.time_created),
+            'time_created': str(self.time_created),
         }, ensure_ascii=False)
 
 
-class EventRecorder(object):
-    __metaclass__ = Singleton
-
+class EventRecorder(with_metaclass(Singleton, object)):
     def create(self, db=None, logger=None):
         self.db = db
         self.external_logger = logger

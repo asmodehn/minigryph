@@ -1,7 +1,7 @@
 from execution.lib.exchange_color import exchange_color
 from lib.exchange.exchange_factory import *
 from lib.logger import get_logger
-from lib.models.exchange import Balance                                         #pyx file
+from lib.models.mysql.exchange import Balance                                         #pyx file
 from lib import session
 
 logger = get_logger(__name__)

@@ -27,7 +27,7 @@ from lib import session
 from lib.exchange.exceptions import *
 from lib.exchange.exchange_factory import *
 from lib.logger import get_logger
-from lib.models.order import Order                                          #pyx file
+from lib.models.mysql.order import Order                                          #pyx file
 from lib.money import Money
 
 logger = get_logger(__name__)

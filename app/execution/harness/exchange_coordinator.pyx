@@ -39,10 +39,10 @@ from lib.exchange import order_types
 from lib.exchange.consts import Consts                                              #pyx file
 from lib.exchange.exchange_api_wrapper import ExchangeAPIWrapper                    #pyx file
 from lib.exchange.retry import exchange_retry                                       #pyx file
-from lib.models.datum import Datum
-from lib.models.event import EventRecorder
-from lib.models.order import Order                                                  #pyx file
-from lib.models.exchange import Exchange as ExchangeData                            #pyx file
+from lib.models.mysql.datum import Datum
+from lib.models.mysql.event import EventRecorder
+from lib.models.mysql.order import Order                                                  #pyx file
+from lib.models.mysql.exchange import Exchange as ExchangeData                            #pyx file
 from lib.money import Money
 from lib.session import commit_mysql_session
 from lib.util.profile import tick_profile

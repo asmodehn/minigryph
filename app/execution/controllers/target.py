@@ -6,7 +6,7 @@ from execution.lib.exchange_color import exchange_color
 from lib import session
 from lib.exchange.exchange_factory import make_exchange_from_key
 from lib.money import Money
-from lib.models.exchange import Exchange as ExchangeData                        #pyx file
+from lib.models.mysql.exchange import Exchange as ExchangeData                        #pyx file
 from lib.logger import get_logger
 
 logger = get_logger(__name__)

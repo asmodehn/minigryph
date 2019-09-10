@@ -6,15 +6,15 @@ random period and checks their results are the same.
 from builtins import range
 import pyximport; pyximport.install()
 
-from cdecimal import *
+from decimal import *
 from datetime import datetime, timedelta
 import os
 import random
 
 from delorean import Delorean
 
-import gryphon.lib.gryphonfury.profit as gryphon_profit
-from gryphon.lib import session
+import lib.gryphonfury.profit as gryphon_profit
+from lib import session
 
 
 def get_random_period():

@@ -18,8 +18,8 @@ from lib.exchange import exchange_factory
 from lib.gryphonfury import positions
 from lib.money import Money
 from lib.logger import get_logger
-from lib.models.order import Order                                              #pyx file
-from lib.models.transaction import Transaction
+from lib.models.mysql.order import Order                                              #pyx file
+from lib.models.mysql.transaction import Transaction
 
 logger = get_logger(__name__)
 

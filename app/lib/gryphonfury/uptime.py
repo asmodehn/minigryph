@@ -3,8 +3,8 @@ from builtins import range
 from past.utils import old_div
 from datetime import timedelta
 
-from lib.models.trade import Trade                                              #pyx file
-from lib.models.order import Order                                              #pyx file
+from lib.models.mysql.trade import Trade                                              #pyx file
+from lib.models.mysql.order import Order                                              #pyx file
 from lib.money import Money
 
 import sqlalchemy

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
+from builtins import str
+from builtins import object
 import os
-from base import Base
 import os
 import json
 import uuid
@@ -9,8 +10,9 @@ from sqlalchemy import ForeignKey, Column, Integer, Unicode, DateTime, UnicodeTe
 from sqlalchemy.orm import relationship, backref
 from sqlalchemy.ext.declarative import declarative_base
 
-from gryphon.lib import session
-from gryphon.lib.money import Money
+from lib import session
+from lib.money import Money
+from lib.models.mysql.base import Base
 
 metadata = Base.metadata
 
@@ -66,7 +68,7 @@ class MarketData(Base):
         self.ticker_symbol = ticker_symbol
    
     def __str__(self):
-        return unicode(self)
+        return str(self)
  
     def __unicode__(self):
         return '%s,%s,%s,%s,%s,%s,%s' % (

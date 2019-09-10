@@ -17,9 +17,9 @@ from lib.exchange.consts import Consts                                          
 import lib.gryphonfury.fees as fees_lib
 import lib.gryphonfury.positions as positions
 from lib.logger import get_logger
-from lib.models.exchange import Exchange as ExchangeData                        #pyx file
-from lib.models.order import Order                                              #pyx file
-from lib.models.trade import Trade                                              #pyx file
+from lib.models.mysql.exchange import Exchange as ExchangeData                        #pyx file
+from lib.models.mysql.order import Order                                              #pyx file
+from lib.models.mysql.trade import Trade                                              #pyx file
 from lib.money import Money
 
 logger = get_logger(__name__)

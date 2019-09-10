@@ -4,7 +4,7 @@ Functions we use to record tick time performance stats.
 
 from delorean import Delorean
 
-from lib.models.datum import Datum, DatumRecorder
+from lib.models.mysql.datum import Datum, DatumRecorder
 from lib.util.profile import tick_profile, tick_profile_data
 
 

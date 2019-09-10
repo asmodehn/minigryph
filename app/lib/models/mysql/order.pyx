@@ -1,4 +1,8 @@
+#!python
+#cython: language_level=3
 # -*- coding: utf-8 -*-
+
+from builtins import str
 from collections import defaultdict
 from datetime import datetime, date, timedelta
 import json
@@ -19,10 +23,10 @@ from sqlalchemy.ext.declarative import declarative_base
 from lib.money import Money
 from lib import gryphon_json_serialize
 from lib.exchange.exchange_factory import make_exchange_from_key
-from lib.models.base import Base
-from lib.models.basic_order import BasicOrder
-from lib.models.datum import Datum
-from lib.models.trade import Trade
+from lib.models.mysql.base import Base                                            #pyx file
+from lib.models.mysql.basic_order import BasicOrder                               #pyx file
+from lib.models.mysql.datum import Datum         
+from lib.models.mysql.trade import Trade                                          #pyx file
 
 metadata = Base.metadata
 
@@ -61,7 +65,7 @@ class Order(Base, BasicOrder):
     
     def __init__(self, actor, mode, volume, price, exchange, exchange_order_id):
         self.status = self.OPEN
-        self.unique_id = unicode(uuid.uuid4().hex)
+        self.unique_id = str(uuid.uuid4().hex)
         self.time_created = datetime.utcnow()
 
         assert actor and price and volume and exchange and mode
@@ -85,8 +89,8 @@ class Order(Base, BasicOrder):
             'order_id':self.order_id,
             'unique_id':self.unique_id,
             'exchange_order_id':self.exchange_order_id,
-            'time_created':unicode(self.time_created),
-            'time_executed':unicode(self.time_executed),
+            'time_created':str(self.time_created),
+            'time_executed':str(self.time_executed),
             'exchange':self.exchange.name,
             'status':self.status,
             'order_type': self.order_type,

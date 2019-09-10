@@ -8,7 +8,7 @@ from lib.gryphonfury import fees as fees_lib
 from lib.gryphonfury import positions
 from lib.gryphonfury import revenue as revenue_lib
 from lib.metrics import quote as quote_lib
-from lib.models.order import Order                                              #pyx file
+from lib.models.mysql.order import Order                                              #pyx file
 from lib.money import Money
 
 

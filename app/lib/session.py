@@ -11,7 +11,7 @@ logger = get_logger(__name__)
 
 def get_mongo_creds():
     import os
-    return os.environ['MONGO_DB']
+    return os.environ['MONGO_DB_CRED']
 
 
 def get_trading_db_mysql_creds():
@@ -139,3 +139,29 @@ def get_a_memcache_connection():
         mc = pylibmc.Client(servers=['localhost:11211'])
     return mc
 
+
+def get_clickhouse_creds():
+    import os
+    return os.environ('CLICKHOUSE_DB_CRED')
+
+def get_a_clickhouse_session(creds):
+    from sqlalchemy import create_engine, MetaData
+    from clickhouse_sqlalchemy import  make_session, engines
+
+    creds = get_clickhouse_creds()
+
+    engine = create_engine(creds)
+    session = make_session(engine)
+
+    return session
+
+def commit_clickhouse_session(session):
+    try:
+        session.commit()
+    except IntegrityError: 
+        session.rollback()
+        logger.info(tc.colored("Integrity Error : data already exists in db", "red"))
+        pass
+    except Exception as e:
+        session.rollback()
+        raise e

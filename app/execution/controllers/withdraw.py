@@ -5,7 +5,7 @@ from lib import session
 from lib.exchange.exchange_factory import make_exchange_data_from_key, make_exchange_from_key
 from lib.logger import get_logger
 from lib.money import Money
-from lib.models.transaction import Transaction
+from lib.models.mysql.transaction import Transaction
 
 logger = get_logger(__name__)
 

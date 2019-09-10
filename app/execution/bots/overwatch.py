@@ -13,9 +13,9 @@ from lib.exchange.exchange_factory import ALL_EXCHANGE_KEYS
 import lib.gryphonfury.positions as positions
 import lib.gryphonfury.revenue as revenue_lib
 from lib.logger import get_logger
-from lib.models.datum import Datum
-from lib.models.order import Order      #pyx file
-from lib.models.trade import Trade      #pyx file
+from lib.models.mysql.datum import Datum
+from lib.models.mysql.order import Order      #pyx file
+from lib.models.mysql.trade import Trade      #pyx file
 from lib.money import Money
 
 logger = get_logger(__name__)

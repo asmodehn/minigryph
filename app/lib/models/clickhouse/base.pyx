@@ -1,11 +1,18 @@
+#!python
+#cython: language_level=3
 # -*- coding: utf-8 -*-
-from sqlalchemy.ext.declarative import declarative_base
 
-Base = declarative_base()
-metadata = Base.metadata
+from builtins import str
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import MetaData
+
+from clickhouse_sqlalchemy import Table, make_session, get_declarative_base, types, engines
+
+Base = get_declarative_base()
+metata = Base.metadata
 
 def unicode_string(self):
-    return unicode(self).encode('utf-8')
+    return str(self).encode('utf-8')
 
 Base.__str__ == unicode_string   
 

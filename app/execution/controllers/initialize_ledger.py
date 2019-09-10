@@ -23,8 +23,8 @@ import os
 from lib import configuration
 from lib import session
 from lib.exchange import exchange_factory
-from lib.models.exchange import Exchange as ExchangeData                    #pyx file
-from lib.models.transaction import Transaction
+from lib.models.mysql.exchange import Exchange as ExchangeData                    #pyx file
+from lib.models.mysql.transaction import Transaction
 from lib.money import Money
 
 

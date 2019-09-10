@@ -1,4 +1,8 @@
+#!python
+#cython: language_level=3
 # -*- coding: utf-8 -*-
+
+from builtins import object
 from datetime import datetime, date, timedelta
 import json
 import os

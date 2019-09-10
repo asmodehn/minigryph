@@ -11,7 +11,7 @@ from sqlalchemy.orm import relationship, backref
 
 from execution.models.backtesting.result import Result
 from lib.exchange.consts import Consts
-from lib.models.base import Base
+from lib.models.mysql.base import Base
 from lib.money import Money
 
 metadata = Base.metadata

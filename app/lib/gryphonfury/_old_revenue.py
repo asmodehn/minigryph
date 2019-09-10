@@ -7,8 +7,8 @@ from operator import attrgetter
 from sqlalchemy.orm import joinedload
 
 from lib.logger import get_logger
-from lib.models.order import Order                                          #pyx file
-from lib.models.trade import Trade                                          #pyx file
+from lib.models.mysql.order import Order                                          #pyx file
+from lib.models.mysql.trade import Trade                                          #pyx file
 import lib.gryphonfury.positions as positions
 import lib.gryphonfury.revenue as revenue_lib
 

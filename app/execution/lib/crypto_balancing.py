@@ -10,8 +10,7 @@ from execution.lib import conf
 from lib.exchange.exchange_factory import make_exchange_from_key
 from lib.logger import get_logger
 from lib.money import Money
-from lib.models.exchange import Exchange                                    #pyx file
-from lib.models.exchange import Transaction                                 #pyx file
+from lib.models.mysql.exchange import Exchange, Transaction                     #pyx file
 from lib.session import commit_mysql_session
 from lib.util.profile import tick_profile
 

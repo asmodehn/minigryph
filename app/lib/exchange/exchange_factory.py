@@ -128,7 +128,7 @@ def initialized_ledgers(db):
     Give us the names of the exchanges that have initialized ledgers in our trading
     database.
     """
-    from lib.models.exchange import Exchange as ExchangeData
+    from lib.models.mysql.exchange import Exchange as ExchangeData
 
     exchange_account_names = db.query(ExchangeData.name).all()
     exchange_account_names = [e[0] for e in exchange_account_names]
@@ -137,7 +137,7 @@ def initialized_ledgers(db):
 
 
 def get_all_initialized_exchange_wrappers(db):
-    from lib.models.exchange import Exchange as ExchangeData
+    from lib.models.mysql.exchange import Exchange as ExchangeData
 
     exchange_accounts = db.query(ExchangeData).all()
 
@@ -150,7 +150,7 @@ def get_all_initialized_exchange_wrappers(db):
 
 
 def make_exchange_datas_from_keys(pair_names, db):
-    from lib.models.exchange import Exchange as ExchangeData
+    from lib.models.mysql.exchange import Exchange as ExchangeData
 
     canonical_pair_names = [canonical_key(k) for k in pair_names]
     exchange_names = [map_pair_name_to_exchange_name(p) for p in canonical_pair_names]

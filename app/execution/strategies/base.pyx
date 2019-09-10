@@ -14,9 +14,9 @@ from lib.configurable_object import ConfigurableObject
 from lib.exchange.consts import Consts
 import lib.gryphonfury.positions as positions
 from lib.logger import get_logger
-from lib.models.datum import DatumRecorder
-from lib.models.flag import Flag
-from lib.models.order import Order
+from lib.models.mysql.datum import DatumRecorder
+from lib.models.mysql.flag import Flag
+from lib.models.mysql.order import Order
 from lib.money import Money
 from lib.session import commit_mysql_session
 
@@ -256,34 +256,5 @@ class Strategy(ConfigurableObject):
             yield gen 
 
 
-    def go_long(self, data, mode='execute', data_type=None, data_path=None):
-        '''
-        backtrader_wrapper needs to be able to run this too,
-        using cerebro datafeed as data
-
-        data_type should be either pandas_dataframe, or cerebro_datafeed
-        handle both differently
-
-        need to add a mode variable so we can have go_long(mode=execute)
-        and go_long(mode=backtest) at the same time and dont need to 
-        rewrite both every time
-        '''
-        data = self.standardize_data(data, mode)
-        pass
-
-    def exit_long(self, data, mode, data_type=None, data_path=None):
-
-        data = self.standardize_data(data, mode)
-        pass
-
-    def go_short(self, data, mode, data_type=None, data_path=None):
-
-        data = self.standardize_data(data, mode)
-        pass
-
-    def exit_short(self, data, mode, data_type=None, data_path=None):
-
-        data = self.standardize_data(data, mode)
-        pass
 
 

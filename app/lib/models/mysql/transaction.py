@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from builtins import str
 from collections import defaultdict
 from datetime import datetime, date, timedelta
 import json
@@ -6,7 +7,12 @@ import os
 import requests
 import uuid
 
-from decimal import *
+# decimal import compatible with py2
+try:
+    from decimal import Decimal 
+except NameError:
+    from cdecimal import Decimal
+
 from delorean import Delorean
 from sqlalchemy import ForeignKey, Column, Integer, Unicode, DateTime, UnicodeText, Numeric
 from sqlalchemy.orm import relationship, backref
@@ -14,13 +20,13 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy import and_, func
 
-from gryphon.lib import gryphon_json_serialize
-from gryphon.lib.exchange.consts import Consts
-from gryphon.lib.exchange.exchange_factory import make_exchange_from_key
-from gryphon.lib.logger import get_logger
-from gryphon.lib.models.base import Base
-from gryphon.lib.money import Money
-from gryphon.lib.util.list import flatten
+from lib import gryphon_json_serialize
+from lib.exchange.consts import Consts
+from lib.exchange.exchange_factory import make_exchange_from_key
+from lib.logger import get_logger
+from lib.models.mysql.base import Base
+from lib.money import Money
+from lib.util.list import flatten
 
 logger = get_logger(__name__)
 
@@ -62,7 +68,7 @@ class Transaction(Base):
     fee_buyback_transaction = relationship("Transaction", remote_side=[transaction_id], backref='fee_buyback_transactions')
     
     def __init__(self, transaction_type, transaction_status, amount, exchange, transaction_details, fee=None):
-        self.unique_id = unicode(uuid.uuid4().hex)
+        self.unique_id = str(uuid.uuid4().hex)
         self.time_created = datetime.utcnow()
         self.transaction_type = transaction_type
         self.transaction_status = transaction_status
@@ -84,7 +90,7 @@ class Transaction(Base):
             'transaction_id':self.transaction_id,
             'transaction_type':self.transaction_type,
             'transaction_status':self.transaction_status,
-            'time_created':unicode(self.time_created),
+            'time_created':str(self.time_created),
             'unique_id':self.unique_id,
             'exchange':self.exchange.name,
             'amount':self.amount,
@@ -211,7 +217,7 @@ class Transaction(Base):
 
     @property
     def position(self):
-        from gryphon.lib.models.exchange import Position
+        from lib.models.exchange import Position
         position = Position()
         if self.transaction_type == self.DEPOSIT:
             position[self.amount.currency] += self.amount

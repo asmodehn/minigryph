@@ -3,8 +3,8 @@ import termcolor as tc
 
 from lib.exchange import exchange_factory
 from lib.logger import get_logger
-from lib.models.trade import Trade                                          #pyx file
-from lib.models.transaction import Transaction
+from lib.models.mysql.trade import Trade                                          #pyx file
+from lib.models.mysql.transaction import Transaction
 from lib.money import Money
 from lib import session
 

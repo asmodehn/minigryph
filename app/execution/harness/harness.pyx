@@ -34,9 +34,6 @@ from lib.exchange.retry import exchange_retry                                   
 from lib.exchange.consts import Consts                                              #pyx file
 from lib.exchange.exceptions import CancelOrderNotFoundError
 from lib.logger import get_logger
-from lib.models.datum import DatumRecorder
-from lib.models.order import Order                                                  #pyx file
-from lib.models.trade import Trade                                                  #pyx file
 from lib.money import Money
 from lib.session import commit_mysql_session
 from lib.util.profile import tick_profile

@@ -12,12 +12,12 @@ from delorean import Delorean
 from sqlalchemy import func, or_, and_
 
 from lib.exchange import exchange_factory
-from lib.models.exchange import Exchange as ExchangeData                            #pyx file
-from lib.models.exchange import Position                                            #pyx file
-from lib.models.liability import Liability
-from lib.models.order import Order                                                  #pyx file
-from lib.models.trade import Trade                                                  #pyx file
-from lib.models.transaction import Transaction
+from lib.models.mysql.exchange import Exchange as ExchangeData                            #pyx file
+from lib.models.mysql.exchange import Position                                            #pyx file
+from lib.models.mysql.liability import Liability
+from lib.models.mysql.order import Order                                                  #pyx file
+from lib.models.mysql.trade import Trade                                                  #pyx file
+from lib.models.mysql.transaction import Transaction
 from lib.money import Money
 from lib.time_parsing import parse
 from lib.logger import get_logger

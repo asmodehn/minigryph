@@ -6,7 +6,7 @@ import uuid
 from sqlalchemy import Column, Unicode, UnicodeText, DateTime, Integer, Numeric
 from sqlalchemy.orm import relationship, backref
 
-from lib.models.base import Base
+from lib.models.mysql.base import Base
 from lib.money import Money
 
 metadata = Base.metadata
